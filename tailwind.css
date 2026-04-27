@@ -1,0 +1,412 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  button,
+  input,
+  select,
+  textarea {
+    @apply appearance-none bg-transparent border-0 outline-none;
+  }
+}
+
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .all-\[unset\] {
+    all: unset;
+  }
+}
+
+:root {
+  --brown-box-shadow: 0px 4px 14.5px 0px rgba(80, 32, 7, 1);
+  --fonts-archivo-font-body-base-desktop-font-family: "Archivo", Helvetica;
+  --fonts-archivo-font-body-base-desktop-font-size: 16px;
+  --fonts-archivo-font-body-base-desktop-font-style: normal;
+  --fonts-archivo-font-body-base-desktop-font-weight: 400;
+  --fonts-archivo-font-body-base-desktop-letter-spacing: 0px;
+  --fonts-archivo-font-body-base-desktop-line-height: 150%;
+  --fonts-archivo-font-body-base-MOBILE-font-family: "Archivo", Helvetica;
+  --fonts-archivo-font-body-base-MOBILE-font-size: 14px;
+  --fonts-archivo-font-body-base-MOBILE-font-style: normal;
+  --fonts-archivo-font-body-base-MOBILE-font-weight: 400;
+  --fonts-archivo-font-body-base-MOBILE-letter-spacing: 0px;
+  --fonts-archivo-font-body-base-MOBILE-line-height: 120.00000476837158%;
+  --fonts-archivo-font-body-caption-MOBILE-TABLET-font-family: "Archivo", Helvetica;
+  --fonts-archivo-font-body-caption-MOBILE-TABLET-font-size: 11px;
+  --fonts-archivo-font-body-caption-MOBILE-TABLET-font-style: normal;
+  --fonts-archivo-font-body-caption-MOBILE-TABLET-font-weight: 400;
+  --fonts-archivo-font-body-caption-MOBILE-TABLET-letter-spacing: 0px;
+  --fonts-archivo-font-body-caption-MOBILE-TABLET-line-height: normal;
+  --fonts-archivo-font-body-label-MOBILE-font-family: "Archivo", Helvetica;
+  --fonts-archivo-font-body-label-MOBILE-font-size: 12px;
+  --fonts-archivo-font-body-label-MOBILE-font-style: normal;
+  --fonts-archivo-font-body-label-MOBILE-font-weight: 600;
+  --fonts-archivo-font-body-label-MOBILE-letter-spacing: 0.9599999785423279px;
+  --fonts-archivo-font-body-label-MOBILE-line-height: normal;
+  --fonts-archivo-font-body-MD-desktop-font-family: "Archivo", Helvetica;
+  --fonts-archivo-font-body-MD-desktop-font-size: 18px;
+  --fonts-archivo-font-body-MD-desktop-font-style: normal;
+  --fonts-archivo-font-body-MD-desktop-font-weight: 400;
+  --fonts-archivo-font-body-MD-desktop-letter-spacing: 0px;
+  --fonts-archivo-font-body-MD-desktop-line-height: 150%;
+  --fonts-archivo-font-body-MD-MOBILE-font-family: "Archivo", Helvetica;
+  --fonts-archivo-font-body-MD-MOBILE-font-size: 16px;
+  --fonts-archivo-font-body-MD-MOBILE-font-style: normal;
+  --fonts-archivo-font-body-MD-MOBILE-font-weight: 400;
+  --fonts-archivo-font-body-MD-MOBILE-letter-spacing: 0px;
+  --fonts-archivo-font-body-MD-MOBILE-line-height: normal;
+  --fonts-archivo-font-body-MD-tablet-font-family: "Archivo", Helvetica;
+  --fonts-archivo-font-body-MD-tablet-font-size: 16px;
+  --fonts-archivo-font-body-MD-tablet-font-style: normal;
+  --fonts-archivo-font-body-MD-tablet-font-weight: 400;
+  --fonts-archivo-font-body-MD-tablet-letter-spacing: 0px;
+  --fonts-archivo-font-body-MD-tablet-line-height: 150%;
+  --fonts-archivo-font-caption-desktop-font-family: "Archivo", Helvetica;
+  --fonts-archivo-font-caption-desktop-font-size: 12px;
+  --fonts-archivo-font-caption-desktop-font-style: normal;
+  --fonts-archivo-font-caption-desktop-font-weight: 400;
+  --fonts-archivo-font-caption-desktop-letter-spacing: 0px;
+  --fonts-archivo-font-caption-desktop-line-height: 139.9999976158142%;
+  --fonts-archivo-font-display-desktop-font-family: "Archivo", Helvetica;
+  --fonts-archivo-font-display-desktop-font-size: 56px;
+  --fonts-archivo-font-display-desktop-font-style: normal;
+  --fonts-archivo-font-display-desktop-font-weight: 700;
+  --fonts-archivo-font-display-desktop-letter-spacing: -0.2800000011920929px;
+  --fonts-archivo-font-display-desktop-line-height: 110.00000238418579%;
+  --fonts-archivo-font-display-tablet-font-family: "Archivo", Helvetica;
+  --fonts-archivo-font-display-tablet-font-size: 48px;
+  --fonts-archivo-font-display-tablet-font-style: normal;
+  --fonts-archivo-font-display-tablet-font-weight: 700;
+  --fonts-archivo-font-display-tablet-letter-spacing: -0.2800000011920929px;
+  --fonts-archivo-font-display-tablet-line-height: 1.100000023841858px;
+  --fonts-archivo-font-h1-bold-MOBILE-font-family: "Fira Sans", Helvetica;
+  --fonts-archivo-font-h1-bold-MOBILE-font-size: 24px;
+  --fonts-archivo-font-h1-bold-MOBILE-font-style: normal;
+  --fonts-archivo-font-h1-bold-MOBILE-font-weight: 700;
+  --fonts-archivo-font-h1-bold-MOBILE-letter-spacing: -0.23999999463558197px;
+  --fonts-archivo-font-h1-bold-MOBILE-line-height: normal;
+  --fonts-archivo-font-h1-desktop-font-family: "Archivo", Helvetica;
+  --fonts-archivo-font-h1-desktop-font-size: 32px;
+  --fonts-archivo-font-h1-desktop-font-style: normal;
+  --fonts-archivo-font-h1-desktop-font-weight: 700;
+  --fonts-archivo-font-h1-desktop-letter-spacing: -0.23999999463558197px;
+  --fonts-archivo-font-h1-desktop-line-height: 120.00000476837158%;
+  --fonts-archivo-font-h1-tablet-font-family: "Archivo", Helvetica;
+  --fonts-archivo-font-h1-tablet-font-size: 32px;
+  --fonts-archivo-font-h1-tablet-font-style: normal;
+  --fonts-archivo-font-h1-tablet-font-weight: 700;
+  --fonts-archivo-font-h1-tablet-letter-spacing: -0.23999999463558197px;
+  --fonts-archivo-font-h1-tablet-line-height: 1.2000000476837158px;
+  --fonts-archivo-font-h2-desktop-font-family: "Archivo", Helvetica;
+  --fonts-archivo-font-h2-desktop-font-size: 24px;
+  --fonts-archivo-font-h2-desktop-font-style: normal;
+  --fonts-archivo-font-h2-desktop-font-weight: 600;
+  --fonts-archivo-font-h2-desktop-letter-spacing: 0px;
+  --fonts-archivo-font-h2-desktop-line-height: 129.99999523162842%;
+  --fonts-archivo-font-h2-semibold-MOBILE-font-family: "Archivo", Helvetica;
+  --fonts-archivo-font-h2-semibold-MOBILE-font-size: 20px;
+  --fonts-archivo-font-h2-semibold-MOBILE-font-style: normal;
+  --fonts-archivo-font-h2-semibold-MOBILE-font-weight: 600;
+  --fonts-archivo-font-h2-semibold-MOBILE-letter-spacing: 0px;
+  --fonts-archivo-font-h2-semibold-MOBILE-line-height: normal;
+  --fonts-archivo-font-h2-tablet-font-family: "Archivo", Helvetica;
+  --fonts-archivo-font-h2-tablet-font-size: 24px;
+  --fonts-archivo-font-h2-tablet-font-style: normal;
+  --fonts-archivo-font-h2-tablet-font-weight: 600;
+  --fonts-archivo-font-h2-tablet-letter-spacing: 0px;
+  --fonts-archivo-font-h2-tablet-line-height: 129.99999523162842%;
+  --fonts-archivo-font-h3-desktop-font-family: "Archivo", Helvetica;
+  --fonts-archivo-font-h3-desktop-font-size: 20px;
+  --fonts-archivo-font-h3-desktop-font-style: normal;
+  --fonts-archivo-font-h3-desktop-font-weight: 600;
+  --fonts-archivo-font-h3-desktop-letter-spacing: 0px;
+  --fonts-archivo-font-h3-desktop-line-height: 139.9999976158142%;
+  --fonts-archivo-font-h3-semibold-MOBILE-font-family: "Fira Sans", Helvetica;
+  --fonts-archivo-font-h3-semibold-MOBILE-font-size: 18px;
+  --fonts-archivo-font-h3-semibold-MOBILE-font-style: normal;
+  --fonts-archivo-font-h3-semibold-MOBILE-font-weight: 600;
+  --fonts-archivo-font-h3-semibold-MOBILE-letter-spacing: 0px;
+  --fonts-archivo-font-h3-semibold-MOBILE-line-height: normal;
+  --fonts-archivo-font-h3-tablet-font-family: "Archivo", Helvetica;
+  --fonts-archivo-font-h3-tablet-font-size: 20px;
+  --fonts-archivo-font-h3-tablet-font-style: normal;
+  --fonts-archivo-font-h3-tablet-font-weight: 600;
+  --fonts-archivo-font-h3-tablet-letter-spacing: 0px;
+  --fonts-archivo-font-h3-tablet-line-height: 139.9999976158142%;
+  --fonts-archivo-font-label-desktop-font-family: "Archivo", Helvetica;
+  --fonts-archivo-font-label-desktop-font-size: 14px;
+  --fonts-archivo-font-label-desktop-font-style: normal;
+  --fonts-archivo-font-label-desktop-font-weight: 600;
+  --fonts-archivo-font-label-desktop-letter-spacing: 0.9599999785423279px;
+  --fonts-archivo-font-label-desktop-line-height: 120.00000476837158%;
+  --fonts-archivo-font-label-font-family: "Archivo", Helvetica;
+  --fonts-archivo-font-label-font-size: 12px;
+  --fonts-archivo-font-label-font-style: normal;
+  --fonts-archivo-font-label-font-weight: 600;
+  --fonts-archivo-font-label-letter-spacing: 0.9599999785423279px;
+  --fonts-archivo-font-label-line-height: normal;
+  --fonts-archivo-font-XXL-display-bold-MOBILE-font-family: "Archivo", Helvetica;
+  --fonts-archivo-font-XXL-display-bold-MOBILE-font-size: 28px;
+  --fonts-archivo-font-XXL-display-bold-MOBILE-font-style: normal;
+  --fonts-archivo-font-XXL-display-bold-MOBILE-font-weight: 700;
+  --fonts-archivo-font-XXL-display-bold-MOBILE-letter-spacing: -0.2800000011920929px;
+  --fonts-archivo-font-XXL-display-bold-MOBILE-line-height: normal;
+  --fonts-fira-sans-font-body-base-desktop-font-family: "Fira Sans", Helvetica;
+  --fonts-fira-sans-font-body-base-desktop-font-size: 16px;
+  --fonts-fira-sans-font-body-base-desktop-font-style: normal;
+  --fonts-fira-sans-font-body-base-desktop-font-weight: 400;
+  --fonts-fira-sans-font-body-base-desktop-letter-spacing: 0px;
+  --fonts-fira-sans-font-body-base-desktop-line-height: 150%;
+  --fonts-fira-sans-font-body-base-MOBILE-font-family: "Fira Sans", Helvetica;
+  --fonts-fira-sans-font-body-base-MOBILE-font-size: 14px;
+  --fonts-fira-sans-font-body-base-MOBILE-font-style: normal;
+  --fonts-fira-sans-font-body-base-MOBILE-font-weight: 400;
+  --fonts-fira-sans-font-body-base-MOBILE-letter-spacing: 0px;
+  --fonts-fira-sans-font-body-base-MOBILE-line-height: 120.00000476837158%;
+  --fonts-fira-sans-font-body-caption-MOBILE-TABLET-font-family: "Fira Sans", Helvetica;
+  --fonts-fira-sans-font-body-caption-MOBILE-TABLET-font-size: 11px;
+  --fonts-fira-sans-font-body-caption-MOBILE-TABLET-font-style: normal;
+  --fonts-fira-sans-font-body-caption-MOBILE-TABLET-font-weight: 400;
+  --fonts-fira-sans-font-body-caption-MOBILE-TABLET-letter-spacing: 0px;
+  --fonts-fira-sans-font-body-caption-MOBILE-TABLET-line-height: normal;
+  --fonts-fira-sans-font-body-label-MOBILE-font-family: "Fira Sans", Helvetica;
+  --fonts-fira-sans-font-body-label-MOBILE-font-size: 12px;
+  --fonts-fira-sans-font-body-label-MOBILE-font-style: normal;
+  --fonts-fira-sans-font-body-label-MOBILE-font-weight: 600;
+  --fonts-fira-sans-font-body-label-MOBILE-letter-spacing: 0.9599999785423279px;
+  --fonts-fira-sans-font-body-label-MOBILE-line-height: normal;
+  --fonts-fira-sans-font-body-MD-desktop-font-family: "Fira Sans", Helvetica;
+  --fonts-fira-sans-font-body-MD-desktop-font-size: 18px;
+  --fonts-fira-sans-font-body-MD-desktop-font-style: normal;
+  --fonts-fira-sans-font-body-MD-desktop-font-weight: 400;
+  --fonts-fira-sans-font-body-MD-desktop-letter-spacing: 0px;
+  --fonts-fira-sans-font-body-MD-desktop-line-height: 150%;
+  --fonts-fira-sans-font-body-MD-MOBILE-font-family: "Fira Sans", Helvetica;
+  --fonts-fira-sans-font-body-MD-MOBILE-font-size: 16px;
+  --fonts-fira-sans-font-body-MD-MOBILE-font-style: normal;
+  --fonts-fira-sans-font-body-MD-MOBILE-font-weight: 400;
+  --fonts-fira-sans-font-body-MD-MOBILE-letter-spacing: 0px;
+  --fonts-fira-sans-font-body-MD-MOBILE-line-height: normal;
+  --fonts-fira-sans-font-body-MD-tablet-font-family: "Fira Sans", Helvetica;
+  --fonts-fira-sans-font-body-MD-tablet-font-size: 16px;
+  --fonts-fira-sans-font-body-MD-tablet-font-style: normal;
+  --fonts-fira-sans-font-body-MD-tablet-font-weight: 400;
+  --fonts-fira-sans-font-body-MD-tablet-letter-spacing: 0px;
+  --fonts-fira-sans-font-body-MD-tablet-line-height: 150%;
+  --fonts-fira-sans-font-caption-desktop-font-family: "Fira Sans", Helvetica;
+  --fonts-fira-sans-font-caption-desktop-font-size: 12px;
+  --fonts-fira-sans-font-caption-desktop-font-style: normal;
+  --fonts-fira-sans-font-caption-desktop-font-weight: 400;
+  --fonts-fira-sans-font-caption-desktop-letter-spacing: 0px;
+  --fonts-fira-sans-font-caption-desktop-line-height: 139.9999976158142%;
+  --fonts-fira-sans-font-display-desktop-font-family: "Fira Sans", Helvetica;
+  --fonts-fira-sans-font-display-desktop-font-size: 56px;
+  --fonts-fira-sans-font-display-desktop-font-style: normal;
+  --fonts-fira-sans-font-display-desktop-font-weight: 700;
+  --fonts-fira-sans-font-display-desktop-letter-spacing: -0.2800000011920929px;
+  --fonts-fira-sans-font-display-desktop-line-height: 110.00000238418579%;
+  --fonts-fira-sans-font-display-tablet-font-family: "Fira Sans", Helvetica;
+  --fonts-fira-sans-font-display-tablet-font-size: 48px;
+  --fonts-fira-sans-font-display-tablet-font-style: normal;
+  --fonts-fira-sans-font-display-tablet-font-weight: 700;
+  --fonts-fira-sans-font-display-tablet-letter-spacing: -0.2800000011920929px;
+  --fonts-fira-sans-font-display-tablet-line-height: 1.100000023841858px;
+  --fonts-fira-sans-font-h1-bold-MOBILE-font-family: "Fira Sans", Helvetica;
+  --fonts-fira-sans-font-h1-bold-MOBILE-font-size: 24px;
+  --fonts-fira-sans-font-h1-bold-MOBILE-font-style: normal;
+  --fonts-fira-sans-font-h1-bold-MOBILE-font-weight: 700;
+  --fonts-fira-sans-font-h1-bold-MOBILE-letter-spacing: -0.23999999463558197px;
+  --fonts-fira-sans-font-h1-bold-MOBILE-line-height: normal;
+  --fonts-fira-sans-font-h1-desktop-font-family: "Fira Sans", Helvetica;
+  --fonts-fira-sans-font-h1-desktop-font-size: 32px;
+  --fonts-fira-sans-font-h1-desktop-font-style: normal;
+  --fonts-fira-sans-font-h1-desktop-font-weight: 700;
+  --fonts-fira-sans-font-h1-desktop-letter-spacing: -0.23999999463558197px;
+  --fonts-fira-sans-font-h1-desktop-line-height: 120.00000476837158%;
+  --fonts-fira-sans-font-h1-tablet-font-family: "Fira Sans", Helvetica;
+  --fonts-fira-sans-font-h1-tablet-font-size: 32px;
+  --fonts-fira-sans-font-h1-tablet-font-style: normal;
+  --fonts-fira-sans-font-h1-tablet-font-weight: 700;
+  --fonts-fira-sans-font-h1-tablet-letter-spacing: -0.23999999463558197px;
+  --fonts-fira-sans-font-h1-tablet-line-height: 1.2000000476837158px;
+  --fonts-fira-sans-font-h2-desktop-font-family: "Fira Sans", Helvetica;
+  --fonts-fira-sans-font-h2-desktop-font-size: 24px;
+  --fonts-fira-sans-font-h2-desktop-font-style: normal;
+  --fonts-fira-sans-font-h2-desktop-font-weight: 600;
+  --fonts-fira-sans-font-h2-desktop-letter-spacing: 0px;
+  --fonts-fira-sans-font-h2-desktop-line-height: 129.99999523162842%;
+  --fonts-fira-sans-font-h2-semibold-MOBILE-font-family: "Fira Sans", Helvetica;
+  --fonts-fira-sans-font-h2-semibold-MOBILE-font-size: 20px;
+  --fonts-fira-sans-font-h2-semibold-MOBILE-font-style: normal;
+  --fonts-fira-sans-font-h2-semibold-MOBILE-font-weight: 600;
+  --fonts-fira-sans-font-h2-semibold-MOBILE-letter-spacing: 0px;
+  --fonts-fira-sans-font-h2-semibold-MOBILE-line-height: normal;
+  --fonts-fira-sans-font-h2-tablet-font-family: "Fira Sans", Helvetica;
+  --fonts-fira-sans-font-h2-tablet-font-size: 24px;
+  --fonts-fira-sans-font-h2-tablet-font-style: normal;
+  --fonts-fira-sans-font-h2-tablet-font-weight: 600;
+  --fonts-fira-sans-font-h2-tablet-letter-spacing: 0px;
+  --fonts-fira-sans-font-h2-tablet-line-height: 129.99999523162842%;
+  --fonts-fira-sans-font-h3-desktop-font-family: "Fira Sans", Helvetica;
+  --fonts-fira-sans-font-h3-desktop-font-size: 20px;
+  --fonts-fira-sans-font-h3-desktop-font-style: normal;
+  --fonts-fira-sans-font-h3-desktop-font-weight: 600;
+  --fonts-fira-sans-font-h3-desktop-letter-spacing: 0px;
+  --fonts-fira-sans-font-h3-desktop-line-height: 139.9999976158142%;
+  --fonts-fira-sans-font-h3-semibold-MOBILE-font-family: "Fira Sans", Helvetica;
+  --fonts-fira-sans-font-h3-semibold-MOBILE-font-size: 18px;
+  --fonts-fira-sans-font-h3-semibold-MOBILE-font-style: normal;
+  --fonts-fira-sans-font-h3-semibold-MOBILE-font-weight: 600;
+  --fonts-fira-sans-font-h3-semibold-MOBILE-letter-spacing: 0px;
+  --fonts-fira-sans-font-h3-semibold-MOBILE-line-height: normal;
+  --fonts-fira-sans-font-h3-tablet-font-family: "Fira Sans", Helvetica;
+  --fonts-fira-sans-font-h3-tablet-font-size: 20px;
+  --fonts-fira-sans-font-h3-tablet-font-style: normal;
+  --fonts-fira-sans-font-h3-tablet-font-weight: 600;
+  --fonts-fira-sans-font-h3-tablet-letter-spacing: 0px;
+  --fonts-fira-sans-font-h3-tablet-line-height: 139.9999976158142%;
+  --fonts-fira-sans-font-label-desktop-font-family: "Fira Sans", Helvetica;
+  --fonts-fira-sans-font-label-desktop-font-size: 14px;
+  --fonts-fira-sans-font-label-desktop-font-style: normal;
+  --fonts-fira-sans-font-label-desktop-font-weight: 600;
+  --fonts-fira-sans-font-label-desktop-letter-spacing: 0.9599999785423279px;
+  --fonts-fira-sans-font-label-desktop-line-height: 120.00000476837158%;
+  --fonts-fira-sans-font-label-font-family: "Fira Sans", Helvetica;
+  --fonts-fira-sans-font-label-font-size: 12px;
+  --fonts-fira-sans-font-label-font-style: normal;
+  --fonts-fira-sans-font-label-font-weight: 600;
+  --fonts-fira-sans-font-label-letter-spacing: 0.9599999785423279px;
+  --fonts-fira-sans-font-label-line-height: normal;
+  --fonts-fira-sans-font-XXL-display-bold-MOBILE-font-family: "Fira Sans", Helvetica;
+  --fonts-fira-sans-font-XXL-display-bold-MOBILE-font-size: 28px;
+  --fonts-fira-sans-font-XXL-display-bold-MOBILE-font-style: normal;
+  --fonts-fira-sans-font-XXL-display-bold-MOBILE-font-weight: 700;
+  --fonts-fira-sans-font-XXL-display-bold-MOBILE-letter-spacing: -0.2800000011920929px;
+  --fonts-fira-sans-font-XXL-display-bold-MOBILE-line-height: normal;
+  --global-tokens-e0: 0px 0px 0px 0px rgba(27, 28, 29, 0);
+  --global-tokens-e1:
+    0px 1px 10px 0px rgba(0, 0, 0, 0.12), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+  --global-tokens-e2:
+    0px 1px 18px 0px rgba(0, 0, 0, 0.12), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 3px 5px 0px rgba(0, 0, 0, 0.2);
+  --global-tokens-e3:
+    0px 2px 16px 0px rgba(0, 0, 0, 0.12), 0px 7px 10px 0px rgba(0, 0, 0, 0.14), 0px 4px 5px 0px rgba(0, 0, 0, 0.2);
+  --green-box-shadow: -4px 4px 15px 0px rgba(0, 102, 48, 1);
+  --green-menu-shadow-boxes: -4px 4px 15px 0px rgba(48, 160, 78, 1);
+  --label-lowercase-font-family: "Fira Sans", Helvetica;
+  --label-lowercase-font-size: 12px;
+  --label-lowercase-font-style: normal;
+  --label-lowercase-font-weight: 600;
+  --label-lowercase-letter-spacing: 0.9599999785423279px;
+  --label-lowercase-line-height: normal;
+  --white-box-shadow: -3px 4px 8px 50px rgba(255, 255, 255, 1);
+}
+
+:root {
+  --animate-spin: spin 1s linear infinite;
+}
+
+.animate-fade-in {
+  animation: fade-in 1s var(--animation-delay, 0s) ease forwards;
+}
+
+.animate-fade-up {
+  animation: fade-up 1s var(--animation-delay, 0s) ease forwards;
+}
+
+.animate-marquee {
+  animation: marquee var(--duration) infinite linear;
+}
+
+.animate-marquee-vertical {
+  animation: marquee-vertical var(--duration) linear infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 8s infinite;
+}
+
+.animate-spin {
+  animation: var(--animate-spin);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes image-glow {
+  0% {
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.74, 0.25, 0.76, 1);
+  }
+
+  10% {
+    opacity: 0.7;
+    animation-timing-function: cubic-bezier(0.12, 0.01, 0.08, 0.99);
+  }
+
+  to {
+    opacity: 0.4;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes shimmer {
+  0%,
+  90%,
+  to {
+    background-position: calc(-100% - var(--shimmer-width)) 0;
+  }
+
+  30%,
+  60% {
+    background-position: calc(100% + var(--shimmer-width)) 0;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate(0);
+  }
+
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+@keyframes marquee-vertical {
+  0% {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
+  }
+}
