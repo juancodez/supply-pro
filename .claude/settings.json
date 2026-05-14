@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(start *)",
+      "Bash(npx *)",
+      "Bash(python *)",
+      "Bash(mkdir *)",
+      "Bash(cp *)",
+      "Bash(mv *)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"[Supply Pro] File saved: $CLAUDE_TOOL_INPUT_FILE_PATH\""
+          }
+        ]
+      }
+    ]
+  }
+}
