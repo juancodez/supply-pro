@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Supply Pro</title>
+<link rel="icon" type="image/svg+xml" href="./assets/images/SP-Signet.svg" />
+<meta name="description" content="Supply Pro is currently under development. Book a demo to get early access." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #006300;
+    --green-deep: #004a00;
+    --green-light: #30A04E;
+    --green-tint: #E8F2EA;
+    --acajou: #502007;
+    --acajou-deep: #3a1705;
+    --bg: #FFFFFF;
+    --surface: #FAFAF8;
+    --text: #0F1410;
+    --text-2: #4A5249;
+    --text-3: #8A8F88;
+    --line: #E8EAE6;
+    --line-2: #DEE2DC;
+    --footer-bg: #0A0C0A;
+    --radius-sm: 8px;
+    --radius: 12px;
+    --radius-lg: 20px;
+    --shadow-sm: 0 1px 2px rgba(15,20,16,0.04), 0 1px 3px rgba(15,20,16,0.06);
+    --shadow-md: 0 8px 24px -10px rgba(15,20,16,0.12);
+    --shadow-lg: 0 30px 60px -25px rgba(0,99,0,0.25);
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; height: 100%; }
+  body {
+    font-family: 'Archivo', system-ui, -apple-system, sans-serif;
+    font-weight: 400;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100%;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.08;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  img, svg { display: block; max-width: 100%; }
+
+  /* ---------- Animated background ---------- */
+  .page-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(-45deg, #e8f2ea, #ffffff, #f4f8f4, #eef5ee, #ffffff, #E8F2EA);
+    background-size: 400% 400%;
+    animation: gradientDrift 16s ease infinite;
+  }
+  .page-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(900px 500px at 80% 10%, rgba(48,160,78,0.08), transparent 60%),
+      radial-gradient(600px 400px at 10% 80%, rgba(0,99,0,0.06), transparent 60%);
+    pointer-events: none;
+  }
+  @keyframes gradientDrift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* ---------- Page layout ---------- */
+  .page-wrap {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    padding: 0 24px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(232,234,230,0.6);
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-signet  { height: 30px; width: auto; display: block; }
+  .logo-wordmark { height: 22px; width: auto; display: block; }
+  .back-link {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-2);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s var(--ease);
+  }
+  .back-link:hover { color: var(--text); }
+
+  /* ---------- Image placeholder ---------- */
+  .img-placeholder {
+    width: 100%;
+    line-height: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .img-placeholder img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* ---------- Main content ---------- */
+  .main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 64px 24px 80px;
+  }
+  .card {
+    width: 100%;
+    max-width: 480px;
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255,255,255,0.9);
+    border-radius: 24px;
+    padding: 48px 44px;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.8) inset,
+      0 4px 6px rgba(15,20,16,0.04),
+      0 20px 60px rgba(0,99,0,0.07),
+      0 40px 80px rgba(15,20,16,0.06);
+    text-align: center;
+    animation: cardIn 0.7s var(--ease) both;
+  }
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  .card-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  .badge-dev {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    background: var(--green-tint);
+    color: var(--green-deep);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .badge-dev .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green-light);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(48,160,78,0.5); }
+    50%       { opacity: 0.8; box-shadow: 0 0 0 5px rgba(48,160,78,0); }
+  }
+
+  .card h1 {
+    font-size: clamp(24px, 4vw, 32px);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+  .card p {
+    font-size: 16px;
+    color: var(--text-2);
+    line-height: 1.6;
+    margin-bottom: 36px;
+  }
+
+  .card-ctas {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 20px;
+    border-radius: var(--radius-sm);
+    font-family: 'Archivo', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s var(--ease);
+    text-align: center;
+    line-height: 1;
+    white-space: nowrap;
+    width: 100%;
+  }
+  .btn-primary {
+    background: var(--green);
+    color: #fff;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.15) inset, 0 1px 2px rgba(0,99,0,0.3);
+  }
+  .btn-primary:hover {
+    background: var(--green-deep);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px -8px rgba(0,99,0,0.5);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--text-2);
+    border-color: var(--line-2);
+  }
+  .btn-secondary:hover {
+    background: var(--surface);
+    color: var(--text);
+    border-color: var(--text-3);
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 24px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-3);
+    border-top: 1px solid rgba(232,234,230,0.5);
+    background: rgba(255,255,255,0.4);
+    backdrop-filter: blur(8px);
+  }
+  footer a {
+    color: var(--text-3);
+    transition: color 0.2s var(--ease);
+  }
+  footer a:hover { color: var(--text); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 640px) {
+    .card { padding: 36px 28px; }
+    .img-placeholder { height: 40vh; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-bg"></div>
+
+<div class="page-wrap">
+
+  <!-- Nav -->
+  <header class="nav">
+    <a href="index.html" class="logo">
+      <img src="./assets/images/SP-Signet.svg" alt="" class="logo-signet" />
+      <img src="./assets/images/SP-logo.svg" alt="Supply Pro" class="logo-wordmark" />
+    </a>
+    <a href="index.html" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Back to home
+    </a>
+  </header>
+
+  <!-- Full-width image placeholder -->
+  <div class="img-placeholder">
+    <img src="./assets/images/hotel-de-ville.jpg" alt="Hotel de Ville kitchen" />
+  </div>
+
+  <!-- Card -->
+  <main class="main">
+    <div class="card">
+
+      <div class="card-logo">
+        <img src="./assets/images/SP-Signet.svg" alt="" class="logo-signet" />
+        <img src="./assets/images/SP-logo.svg" alt="Supply Pro" class="logo-wordmark" />
+      </div>
+
+      <div class="badge-dev">
+        <span class="dot"></span>
+        Under Development
+      </div>
+
+      <h1>SupplyPro is<br/>Launching Soon</h1>
+
+      <p>We're currently building the SupplyPro platform and user accounts are not available yet. If you'd like to learn more or get early access, please book a demo with our team.</p>
+
+      <div class="card-ctas">
+        <a href="mailto:juangomezvara@gmail.com" class="btn btn-primary">
+          Book a Demo
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="mailto:juangomezvara@gmail.com" class="btn btn-secondary">Contact Us</a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <span>© 2026 Supply Pro — <a href="index.html">Back to home</a></span>
+  </footer>
+
+</div>
+
+</body>
+</html>

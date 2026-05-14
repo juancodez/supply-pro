@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Supply Pro</title>
+<link rel="icon" type="image/svg+xml" href="./assets/images/SP-Signet.svg" />
+<meta name="description" content="An early warning system for professional kitchens. Anticipate supplier issues before they reach your kitchen." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #006300;
+    --green-deep: #004a00;
+    --green-light: #30A04E;
+    --green-tint: #E8F2EA;
+    --acajou: #502007;
+    --acajou-deep: #3a1705;
+    --bg: #FFFFFF;
+    --surface: #FAFAF8;
+    --text: #0F1410;
+    --text-2: #4A5249;
+    --text-3: #8A8F88;
+    --line: #E8EAE6;
+    --line-2: #DEE2DC;
+    --footer-bg: #0A0C0A;
+    --radius-sm: 8px;
+    --radius: 12px;
+    --radius-lg: 20px;
+    --shadow-sm: 0 1px 2px rgba(15,20,16,0.04), 0 1px 3px rgba(15,20,16,0.06);
+    --shadow-md: 0 8px 24px -10px rgba(15,20,16,0.12);
+    --shadow-lg: 0 30px 60px -25px rgba(0,99,0,0.25);
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: 'Archivo', system-ui, -apple-system, sans-serif;
+    font-weight: 400;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, .display {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.08;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  img, svg { display: block; max-width: 100%; }
+  button { font-family: inherit; }
+
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- Announcement ---------- */
+  .announce {
+    background: var(--text);
+    color: #fff;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 10px 16px;
+    letter-spacing: 0.005em;
+  }
+  .announce .dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: var(--green-light);
+    border-radius: 50%;
+    margin-right: 8px;
+    transform: translateY(-1px);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(48,160,78,0.5); }
+    50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(48,160,78,0); }
+  }
+  .announce a {
+    margin-left: 6px;
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    padding-bottom: 1px;
+    transition: border-color 0.2s var(--ease);
+  }
+  .announce a:hover { border-color: #fff; }
+
+  /* ---------- Navbar ---------- */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: saturate(160%) blur(12px);
+    -webkit-backdrop-filter: saturate(160%) blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: transform 0.35s var(--ease), border-color 0.2s var(--ease), background 0.2s var(--ease);
+  }
+  .nav.scrolled {
+    border-color: var(--line);
+    background: rgba(255,255,255,0.95);
+  }
+  .nav.hidden { transform: translateY(-100%); }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;
+  }
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-signet { height: 30px; width: auto; display: block; }
+  .logo-wordmark { height: 22px; width: auto; display: block; }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-2);
+    transition: color 0.2s var(--ease);
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-cta { display: flex; align-items: center; gap: 8px; }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 18px;
+    border-radius: var(--radius-sm);
+    font-family: 'Archivo', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s var(--ease);
+    text-align: center;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .btn-primary {
+    background: var(--green);
+    color: #fff;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.15) inset, 0 1px 2px rgba(0,99,0,0.3);
+  }
+  .btn-primary:hover {
+    background: var(--green-deep);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px -8px rgba(0,99,0,0.5);
+  }
+  .btn-ghost { background: transparent; color: var(--text); }
+  .btn-ghost:hover { background: var(--surface); }
+  .btn-secondary {
+    background: #fff;
+    color: var(--text);
+    border-color: var(--line-2);
+  }
+  .btn-secondary:hover { border-color: var(--text-3); }
+  .btn-white {
+    background: #fff;
+    color: var(--acajou-deep);
+    font-weight: 700;
+  }
+  .btn-white:hover { background: #f4f1ee; transform: translateY(-1px); }
+  .btn-lg { padding: 14px 22px; font-size: 15px; }
+
+  .burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+  }
+  .burger span {
+    display: block;
+    width: 22px;
+    height: 1.8px;
+    background: var(--text);
+    transition: transform 0.25s var(--ease), opacity 0.2s var(--ease);
+  }
+  .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .burger.open span:nth-child(2) { opacity: 0; }
+  .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ---------- Scroll reveal ---------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 88px 0 100px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(800px 400px at 80% -10%, rgba(48,160,78,0.10), transparent 60%),
+      radial-gradient(600px 300px at 10% 10%, rgba(80,32,7,0.04), transparent 60%);
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px 6px 8px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-2);
+    margin-bottom: 28px;
+    box-shadow: var(--shadow-sm);
+  }
+  .hero-eyebrow .badge {
+    background: var(--green-tint);
+    color: var(--green-deep);
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: clamp(44px, 6vw, 76px);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 0.98;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+  .hero h1 .accent {
+    color: var(--green);
+    font-style: italic;
+    font-weight: 500;
+  }
+  .hero .sub {
+    font-size: 19px;
+    color: var(--text-2);
+    margin-bottom: 36px;
+    max-width: 520px;
+    line-height: 1.5;
+  }
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+  .hero-trust {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 13px;
+    color: var(--text-3);
+    flex-wrap: wrap;
+  }
+  .hero-trust .item { display: inline-flex; align-items: center; gap: 6px; }
+  .hero-trust svg { color: var(--green-light); }
+
+  /* Phone frame */
+  .phone-stage {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .phone-stage::after {
+    content: '';
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(0,99,0,0.15), transparent 70%);
+    z-index: -1;
+    filter: blur(40px);
+  }
+  .phone-frame {
+    width: 100%;
+    max-width: 320px;
+    aspect-ratio: 390 / 844;
+    background: linear-gradient(180deg, #007a00 0%, #004a00 100%);
+    border-radius: 44px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    color: rgba(255,255,255,0.7);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 32px 18px;
+    text-align: center;
+    box-shadow:
+      0 0 0 10px #0a0c0a,
+      0 0 0 11px #2a2d29,
+      0 40px 80px -20px rgba(0,99,0,0.4),
+      0 20px 40px -20px rgba(0,0,0,0.4);
+    position: relative;
+    overflow: hidden;
+  }
+  .phone-frame::before {
+    content: '';
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 26px;
+    background: #0a0c0a;
+    border-radius: 999px;
+    z-index: 2;
+  }
+  .phone-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(255,255,255,0.18), transparent 50%),
+      radial-gradient(circle at 70% 80%, rgba(48,160,78,0.4), transparent 50%);
+    pointer-events: none;
+  }
+  .phone-frame span { position: relative; z-index: 1; opacity: 0.85; }
+
+  /* ---------- Full-width image strip ---------- */
+  .full-img-strip {
+    width: 100%;
+    line-height: 0;
+  }
+  .full-img-strip img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* ---------- Section primitives ---------- */
+  section.section { padding: 112px 0; position: relative; }
+  section.section.alt { background: var(--surface); }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Archivo', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--green);
+    margin-bottom: 20px;
+  }
+  h2.section-title {
+    font-size: clamp(34px, 4.5vw, 56px);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.04;
+    margin-bottom: 24px;
+    max-width: 780px;
+    color: var(--text);
+  }
+  .section-lead {
+    font-size: 18px;
+    color: var(--text-2);
+    max-width: 640px;
+    line-height: 1.55;
+  }
+  .section-header { margin-bottom: 64px; }
+  .section-header.centered { text-align: center; }
+  .section-header.centered h2,
+  .section-header.centered .section-lead { margin-left: auto; margin-right: auto; }
+
+  /* ---------- Problem stats ---------- */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .stat-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 36px 32px;
+    transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
+  }
+  .stat-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--green-light);
+    box-shadow: var(--shadow-md);
+  }
+  .stat-number {
+    font-family: 'Archivo', sans-serif;
+    font-size: 56px;
+    font-weight: 500;
+    color: var(--green);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .stat-label {
+    font-size: 15px;
+    color: var(--text-2);
+    line-height: 1.5;
+    max-width: 240px;
+  }
+
+  /* ---------- Steps ---------- */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .step {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 36px 32px;
+    transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
+  }
+  .step:hover { border-color: var(--text-3); transform: translateY(-2px); }
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--green-tint);
+    color: var(--green-deep);
+    margin-bottom: 24px;
+    transition: background 0.2s var(--ease);
+  }
+  .step-num svg { transition: transform 0.25s var(--ease); }
+  .step:hover .step-num { background: var(--green); color: #fff; }
+  .step:hover .step-num svg { transform: scale(1.12); }
+  .step h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+  .step p {
+    font-size: 15px;
+    color: var(--text-2);
+    line-height: 1.55;
+  }
+
+  /* ---------- Feature alternating ---------- */
+  .feature {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 96px;
+    align-items: center;
+  }
+  .feature.reverse .feature-text { order: 2; }
+  .feature.reverse .feature-visual { order: 1; }
+  .feature h2 {
+    font-size: clamp(30px, 3.8vw, 46px);
+    font-weight: 600;
+    letter-spacing: -0.028em;
+    line-height: 1.05;
+    margin-bottom: 20px;
+  }
+  .feature p {
+    font-size: 17px;
+    color: var(--text-2);
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+  .feature-bullets { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .feature-bullets li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 15px;
+    color: var(--text);
+  }
+  .feature-bullets svg {
+    flex-shrink: 0;
+    color: var(--green);
+    margin-top: 3px;
+  }
+
+  /* ---------- Feature image ---------- */
+  .feature-img-wrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+  }
+  .feature-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s ease-out;
+  }
+  .feature-img-wrap:hover .feature-img { transform: scale(1.04); }
+  .feature-img-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 24px;
+    text-align: center;
+    transition: background 0.35s var(--ease);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .feature-img-wrap:hover .feature-img-overlay { background: rgba(0,0,0,0.72); }
+  .feature-img-overlay-title {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+  }
+  .feature-img-wrap:hover .feature-img-overlay-title { opacity: 1; transform: translateY(0); }
+  .feature-img-overlay-desc {
+    color: rgba(255,255,255,0.82);
+    font-size: 14px;
+    line-height: 1.5;
+    max-width: 280px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.35s 0.05s var(--ease), transform 0.35s 0.05s var(--ease);
+  }
+  .feature-img-wrap:hover .feature-img-overlay-desc { opacity: 1; transform: translateY(0); }
+
+  /* ---------- Video section ---------- */
+  .video-section {
+    background: linear-gradient(180deg, var(--green-deep) 0%, var(--green) 100%);
+    color: #fff;
+    padding: 112px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .video-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(800px 400px at 50% 0%, rgba(48,160,78,0.4), transparent 60%);
+    pointer-events: none;
+  }
+  .video-section > * { position: relative; }
+  .video-section .tag { color: rgba(255,255,255,0.8); }
+  .video-section .tag::before { background: rgba(255,255,255,0.5); }
+  .video-section h2 {
+    font-size: clamp(34px, 4.5vw, 56px);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+    color: #fff;
+  }
+  .video-section .sub {
+    font-size: 18px;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 56px;
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .video-wrap {
+    max-width: 960px;
+    margin: 0 auto;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 40px 100px -30px rgba(0,0,0,0.6);
+    background: #000;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .video-wrap video { width: 100%; display: block; }
+  .video-placeholder {
+    aspect-ratio: 16 / 9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 500;
+    background: #0a0c0a;
+  }
+  .play-btn {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+  }
+
+  /* ---------- Research / logo cloud ---------- */
+  .logo-cloud {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+    margin-top: 48px;
+    margin-bottom: 72px;
+    padding: 32px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .logo-cloud .label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-3);
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  .logo-cloud .flag {
+    font-family: 'Archivo', sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--text-2);
+    letter-spacing: -0.01em;
+    opacity: 0.7;
+    transition: opacity 0.2s var(--ease), color 0.2s var(--ease);
+  }
+  .logo-cloud .flag:hover { opacity: 1; color: var(--text); }
+
+  .quotes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .quote-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: border-color 0.3s var(--ease);
+  }
+  .quote-card:hover { border-color: var(--text-3); }
+  .quote-card .mark {
+    font-family: 'Archivo', sans-serif;
+    font-size: 44px;
+    color: var(--green);
+    line-height: 0.5;
+    height: 22px;
+  }
+  .quote-card blockquote {
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--text);
+    font-weight: 500;
+    flex: 1;
+  }
+  .quote-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+  .quote-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    flex-shrink: 0;
+    border: 2px solid var(--line);
+  }
+  .quote-author-info { display: flex; flex-direction: column; gap: 2px; }
+  .quote-author .name { font-weight: 600; font-size: 14px; color: var(--text); }
+  .quote-author .meta { font-size: 13px; color: var(--text-3); }
+
+  /* ---------- Pricing ---------- */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  .pricing-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 40px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  }
+  .pricing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+  .pricing-card.featured {
+    border-color: var(--green);
+    box-shadow: 0 0 0 1px var(--green), var(--shadow-lg);
+  }
+  .pricing-card.featured:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 0 1px var(--green), 0 20px 60px -20px rgba(0,99,0,0.3);
+  }
+  .pricing-badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--green);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 999px;
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+  }
+  .pricing-icon {
+    width: 52px;
+    height: 52px;
+    margin-bottom: 20px;
+  }
+  .pricing-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .pricing-name {
+    font-family: 'Archivo', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-3);
+    margin-bottom: 12px;
+  }
+  .pricing-price {
+    font-family: 'Archivo', sans-serif;
+    font-size: 48px;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  .pricing-period {
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--text-3);
+    letter-spacing: 0;
+  }
+  .pricing-desc {
+    font-size: 14px;
+    color: var(--text-2);
+    line-height: 1.55;
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--line);
+  }
+  .pricing-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 32px;
+    flex: 1;
+  }
+  .pricing-features li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text);
+  }
+  .pricing-features li svg { flex-shrink: 0; color: var(--green); }
+  .pricing-feature-missing { color: var(--text-3) !important; }
+  .pricing-feature-missing svg { color: var(--text-3) !important; }
+  .pricing-btn { width: 100%; margin-bottom: 12px; }
+  .pricing-vat {
+    font-size: 12px;
+    color: var(--text-3);
+    text-align: center;
+  }
+  @media (max-width: 768px) {
+    .pricing-grid { grid-template-columns: 1fr; max-width: 480px; }
+  }
+
+  /* ---------- CTA banner ---------- */
+  .cta-banner {
+    background: linear-gradient(135deg, var(--green-deep) 0%, var(--green) 100%);
+    color: #fff;
+    padding: 112px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(600px 300px at 80% 0%, rgba(255,255,255,0.06), transparent 60%),
+      radial-gradient(400px 200px at 20% 100%, rgba(48,160,78,0.15), transparent 60%);
+  }
+  .cta-banner > * { position: relative; }
+  .cta-banner h2 {
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    margin-bottom: 18px;
+    color: #fff;
+  }
+  .cta-banner p {
+    font-size: 18px;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 40px;
+    max-width: 540px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    background: var(--footer-bg);
+    color: rgba(255,255,255,0.65);
+    padding: 80px 0 32px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 56px;
+  }
+  .footer-brand .logo { color: #fff; margin-bottom: 20px; }
+  .footer-brand p {
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 280px;
+    color: rgba(255,255,255,0.55);
+  }
+  .footer-col h4 {
+    font-family: 'Archivo', sans-serif;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 20px;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-col a {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    transition: color 0.2s var(--ease);
+  }
+  .footer-col a:hover { color: #fff; }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1024px) {
+    .hero-grid { gap: 56px; }
+    .feature { gap: 64px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    section.section { padding: 72px 0; }
+    .hero { padding: 56px 0 72px; }
+
+    .nav-links, .nav-cta .btn-ghost, .nav-cta .btn-primary { display: none; }
+    .burger { display: flex; }
+
+    .mobile-menu {
+      position: fixed;
+      top: 68px;
+      left: 0; right: 0;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+      padding: 24px;
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+      box-shadow: var(--shadow-md);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 17px; font-weight: 500; }
+    .mobile-menu .btn { margin-top: 8px; width: 100%; }
+
+    .hero-grid { grid-template-columns: 1fr; text-align: left; }
+    .phone-stage { margin-top: 16px; }
+    .phone-frame { max-width: 260px; }
+
+    .stats-grid, .steps-grid, .quotes-grid { grid-template-columns: 1fr; }
+    .feature { grid-template-columns: 1fr; gap: 40px; }
+    .feature.reverse .feature-text { order: 1; }
+    .feature.reverse .feature-visual { order: 2; }
+
+    .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; }
+
+    .logo-cloud { gap: 24px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Announcement -->
+<div class="announce">
+  <span class="dot"></span>
+  Supply Pro is launching soon — be the first to know
+  <a href="#cta">Get early access &rarr;</a>
+</div>
+
+<!-- Navbar -->
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#" class="logo">
+      <img src="./assets/images/SP-Signet.svg" alt="" class="logo-signet" />
+      <img src="./assets/images/SP-logo.svg" alt="Supply Pro" class="logo-wordmark" />
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#chefs">For Chefs</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a href="login.html" class="btn btn-ghost">Login</a>
+      <a href="mailto:juangomezvara@gmail.com" class="btn btn-primary">Book a Demo</a>
+      <button class="burger" id="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-grid">
+      <div>
+        <span class="hero-eyebrow reveal">
+          <span class="badge">New</span>
+          Built from 10 expert interviews · 5 countries
+        </span>
+        <h1 class="reveal">Know before<br/>the truck <span class="accent">arrives.</span></h1>
+        <p class="sub reveal">Supply Pro is the early warning system for professional kitchens. Anticipate supplier issues — affected products, reasons, and ready alternatives — before they reach your door.</p>
+        <div class="hero-ctas reveal">
+          <a href="mailto:juangomezvara@gmail.com" class="btn btn-primary btn-lg">Book a Demo
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#video" class="btn btn-secondary btn-lg">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            Watch the video
+          </a>
+        </div>
+        <div class="hero-trust reveal">
+          <span class="item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> No phone calls</span>
+          <span class="item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> No WhatsApp chaos</span>
+          <span class="item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Resolve in &lt; 3 min</span>
+        </div>
+      </div>
+      <div class="phone-stage reveal">
+        <div class="feature-img-wrap">
+          <img src="./assets/images/sp-on-00.webp" alt="Supply Pro app" class="feature-img" />
+          <div class="feature-img-overlay">
+            <span class="feature-img-overlay-title">Supply Pro</span>
+            <span class="feature-img-overlay-desc">Know before the truck arrives.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Full-width image -->
+<div class="full-img-strip">
+  <img src="./assets/images/brigata_di_cucina_2.jpg" alt="Professional kitchen brigade" />
+</div>
+
+<!-- Problem -->
+<section class="section alt" id="problem">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="tag">The Problem</span>
+      <h2 class="section-title">The delivery truck is at the door. Now what?</h2>
+      <p class="section-lead">In a professional kitchen, every minute matters. A missing ingredient at 11:30 AM is not a logistics issue — it's a service-on-the-line emergency.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card reveal">
+        <div class="stat-number" data-count="60" data-suffix="%">0%</div>
+        <div class="stat-label">of professional chefs report stress from late or incorrect deliveries.</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-number" data-count="10" data-suffix="">0</div>
+        <div class="stat-label">expert interviews across 5 countries shaped every design decision.</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-number">&lt;&nbsp;3<span style="font-size:0.4em;letter-spacing:0;font-weight:500;">&nbsp;MIN</span></div>
+        <div class="stat-label">to detect and resolve a supplier issue using Supply Pro.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Full-width image: chef phone -->
+<div class="full-img-strip">
+  <img src="./assets/images/chef-phone.webp" alt="Chef using Supply Pro on phone" />
+</div>
+
+<!-- How it works -->
+<section class="section" id="how">
+  <div class="container">
+    <div class="section-header centered reveal">
+      <span class="tag">How it Works</span>
+      <h2 class="section-title">One moment. One decision. Zero surprises.</h2>
+      <p class="section-lead">From order placement to early warning, Supply Pro removes the noise between the kitchen and its supply chain.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step reveal">
+        <div class="step-num">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+        </div>
+        <h3>Place the order</h3>
+        <p>Voice dictation captures the full order in seconds — no forms, no menus, no friction. Just the way chefs already speak.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3>Detect the issue</h3>
+        <p>Supply Pro monitors suppliers in real time and flags problems early — long before the delivery window closes.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16V4m0 0L3 8m4-4l4 4"/><path d="M17 8v12m0 0l4-4m-4 4l-4-4"/></svg>
+        </div>
+        <h3>Pick an alternative</h3>
+        <p>An alert arrives with affected products, the reason, and ready-to-confirm alternatives. One tap. Service keeps moving.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Feature 1 -->
+<section class="section alt" id="chefs">
+  <div class="container">
+    <div class="feature">
+      <div class="feature-visual reveal">
+        <div class="feature-img-wrap">
+          <img src="./assets/images/SP-EWS-01.png" alt="Early Warning System screen" class="feature-img" />
+          <div class="feature-img-overlay">
+            <span class="feature-img-overlay-title">Early Warning System</span>
+            <span class="feature-img-overlay-desc">Real-time alerts before the issue reaches your kitchen.</span>
+          </div>
+        </div>
+      </div>
+      <div class="feature-text reveal">
+        <span class="tag">Early Warning System</span>
+        <h2>Anticipate.<br/>Don't react.</h2>
+        <p>When a supplier has a problem, Supply Pro notifies the chef immediately — with the affected product, the reason, and the available alternatives. No phone calls. No WhatsApp. No surprises.</p>
+        <ul class="feature-bullets">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Real-time supplier status, no manual checks</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Affected product + reason + alternatives in one alert</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> Push notification + in-app history</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Feature 2 -->
+<section class="section" id="suppliers">
+  <div class="container">
+    <div class="feature reverse">
+      <div class="feature-text reveal">
+        <span class="tag">Alternative Products</span>
+        <h2>The system suggests.<br/>The chef decides.</h2>
+        <p>Supply Pro automatically proposes alternative products with price, availability and delivery time. One tap to confirm. The kitchen keeps moving.</p>
+        <ul class="feature-bullets">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> Price, availability and delivery time at a glance</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> One-tap confirmation, no copy-paste</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg> Decisions logged for kitchen memory</li>
+        </ul>
+      </div>
+      <div class="feature-visual reveal">
+        <div class="feature-img-wrap">
+          <img src="./assets/images/SP-ESW-04.png" alt="Alternative Products screen" class="feature-img" />
+          <div class="feature-img-overlay">
+            <span class="feature-img-overlay-title">Alternative Products</span>
+            <span class="feature-img-overlay-desc">Smart suggestions. One tap to confirm. Service keeps moving.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Video -->
+<section class="video-section" id="video">
+  <div class="container">
+    <span class="tag reveal">See It In Action</span>
+    <h2 class="reveal">The full flow, in under 3 minutes.</h2>
+    <p class="sub reveal">From order placement to early warning to alternative confirmation — the complete kitchen-side experience.</p>
+    <div class="video-wrap reveal">
+      <video controls preload="metadata" poster="">
+        <source src="./assets/SP-FLow.mp4" type="video/mp4" />
+        <div class="video-placeholder">
+          <span class="play-btn">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+          Video coming soon
+        </div>
+      </video>
+    </div>
+  </div>
+</section>
+
+<!-- Research -->
+<section class="section">
+  <div class="container">
+    <div class="section-header centered reveal">
+      <span class="tag">Built on Research</span>
+      <h2 class="section-title">10 chefs. 5 countries. 1 insight.</h2>
+      <p class="section-lead">Supply Pro was not built from assumptions. It was built from qualitative expert interviews with professional chefs across Europe and Latin America. Every design decision traces back to a real conversation.</p>
+    </div>
+
+    <div class="logo-cloud reveal">
+      <span class="label">Field research conducted in</span>
+      <span class="flag">Switzerland</span>
+      <span class="flag">France</span>
+      <span class="flag">Spain</span>
+      <span class="flag">Germany</span>
+      <span class="flag">Uruguay</span>
+    </div>
+
+    <div class="quotes-grid">
+      <div class="quote-card reveal">
+        <div class="mark">&ldquo;</div>
+        <blockquote>An early warning system for delays or supplier problems would be a good solution to this problem, as it would allow us to respond sooner and salvage the service.</blockquote>
+        <div class="quote-author">
+          <img src="./assets/images/Daniel-Garcia-Sera.png" alt="Daniel Garcia Serra" class="quote-avatar" />
+          <div class="quote-author-info">
+            <span class="name">Daniel Garcia Serra</span>
+            <span class="meta">Executive Chef · Yellowstone Club, Montana, US</span>
+          </div>
+        </div>
+      </div>
+      <div class="quote-card reveal">
+        <div class="mark">&ldquo;</div>
+        <blockquote>If the product doesn't meet the required standard, I immediately feel frustrated and concerned about the operational side of things. As a chef, I am responsible for the final quality.</blockquote>
+        <div class="quote-author">
+          <img src="./assets/images/Edoardo-De-simone.jpg" alt="Edoardo De Simone" class="quote-avatar" />
+          <div class="quote-author-info">
+            <span class="name">Edoardo De Simone</span>
+            <span class="meta">Executive Chef · Clinique La Prairie, Clarens, Suisse</span>
+          </div>
+        </div>
+      </div>
+      <div class="quote-card reveal">
+        <div class="mark">&ldquo;</div>
+        <blockquote>Then you often have to run around to make sure they deliver the product on time and in good condition, or you have to work with other suppliers, but it's always a headache when that happens to you.</blockquote>
+        <div class="quote-author">
+          <img src="./assets/images/Marco.jpg" alt="Marco Silva Lindblom" class="quote-avatar" />
+          <div class="quote-author-info">
+            <span class="name">Marco Silva Lindblom</span>
+            <span class="meta">Executive Chef · England Embassy, Montevideo, Uruguay</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="section alt" id="pricing">
+  <div class="container">
+    <div class="section-header centered reveal">
+      <span class="tag">Pricing</span>
+      <h2 class="section-title">Simple, transparent pricing.</h2>
+      <p class="section-lead">No hidden fees. No long-term contracts. Choose the plan that fits your kitchen operation.</p>
+    </div>
+    <div class="pricing-grid">
+
+      <!-- Basic -->
+      <div class="pricing-card reveal">
+        <div class="pricing-icon">
+          <img src="./assets/images/carrot.svg" alt="" />
+        </div>
+        <div class="pricing-name">Basic</div>
+        <div class="pricing-price">159€ <span class="pricing-period">/ month</span></div>
+        <p class="pricing-desc">Digitise your operation without friction from a single system.</p>
+        <ul class="pricing-features">
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Up to 5 suppliers monitored
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Early warning alerts
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Alternative product suggestions
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            30 AI-assisted order resolutions
+          </li>
+          <li class="pricing-feature-missing">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            GPS delivery tracking
+          </li>
+        </ul>
+        <a href="mailto:juangomezvara@gmail.com" class="btn btn-secondary pricing-btn">Book a Demo</a>
+        <p class="pricing-vat">*VAT not included</p>
+      </div>
+
+      <!-- Standard -->
+      <div class="pricing-card featured reveal">
+        <div class="pricing-badge">⭐ Our recommendation</div>
+        <div class="pricing-icon">
+          <img src="./assets/images/artichoke.svg" alt="" />
+        </div>
+        <div class="pricing-name">Standard</div>
+        <div class="pricing-price">299€ <span class="pricing-period">/ month</span></div>
+        <p class="pricing-desc">Centralise decisions and reduce errors at scale.</p>
+        <ul class="pricing-features">
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Unlimited suppliers monitored
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Priority early warning alerts
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Unlimited AI-assisted resolutions
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Advanced analytics &amp; reporting
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Real-time GPS delivery tracking
+          </li>
+        </ul>
+        <a href="mailto:juangomezvara@gmail.com" class="btn btn-primary pricing-btn">Book a Demo</a>
+        <p class="pricing-vat">*VAT not included</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner" id="cta">
+  <div class="container">
+    <h2 class="reveal">Ready to stop reacting?</h2>
+    <p class="reveal">Join the early access program for professional kitchens. Limited spots in the first cohort.</p>
+    <a href="mailto:juangomezvara@gmail.com" class="btn btn-white btn-lg reveal">
+      Book a Demo
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <img src="./assets/images/SP-Signet.svg" alt="" class="logo-signet" style="filter: brightness(0) invert(1);" />
+          <img src="./assets/images/SP-logo.svg" alt="Supply Pro" class="logo-wordmark" style="filter: brightness(0) invert(1);" />
+        </a>
+        <p>The operational memory of a professional kitchen.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#chefs">For Chefs</a></li>
+          <li><a href="#suppliers">For Suppliers</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Research</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Juan Gomez Vara — JGV Design</span>
+      <a href="#">LinkedIn &rarr;</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Navbar behavior
+  (function() {
+    const nav = document.getElementById('nav');
+    let lastY = window.scrollY;
+    let ticking = false;
+
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        window.requestAnimationFrame(function() {
+          const y = window.scrollY;
+          nav.classList.toggle('scrolled', y > 8);
+          if (y > lastY && y > 240) nav.classList.add('hidden');
+          else nav.classList.remove('hidden');
+          lastY = y;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+  })();
+
+
+  // Scroll reveal
+  (function() {
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.reveal').forEach(function(el) { el.classList.add('in'); });
+      return;
+    }
+    const io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry, i) {
+        if (entry.isIntersecting) {
+          entry.target.style.transitionDelay = (i % 4) * 60 + 'ms';
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
+  })();
+
+  // Stat counter
+  (function() {
+    const nums = document.querySelectorAll('.stat-number[data-count]');
+    if (!nums.length || !('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = parseInt(el.dataset.count, 10);
+        const suffix = el.dataset.suffix || '';
+        const duration = 1400;
+        const start = performance.now();
+        function tick(now) {
+          const p = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(target * eased) + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        io.unobserve(el);
+      });
+    }, { threshold: 0.4 });
+    nums.forEach(function(n) { io.observe(n); });
+  })();
+</script>
+
+</body>
+</html>
